@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+    use App\Http\Controllers\ProfesorController;
+@endphp
 @extends('layouts.app')
 
 @section('content')
@@ -14,7 +18,10 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('You are logged in!') }} {{Auth::user()->name}}<br>
+                    @if(\App\Http\Controllers\ProfesorController::existe() == false)
+                        <a href="/registro-profesor">Quiero ser profesor</a>
+                    @endif
                 </div>
             </div>
         </div>

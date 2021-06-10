@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDireccionsTable extends Migration
+class CreateCursosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateDireccionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('direccions', function (Blueprint $table) {
+        Schema::create('cursos', function (Blueprint $table) {
             $table->id();
-            $table->string("region");
-            $table->string("provincia");
-            $table->string("distrito");
-            $table->string("residencia");
-            $table->unsignedBigInteger("id_usuario");
+            $table->string('nombre');
+            $table->float('precio');
+            $table->unsignedBigInteger('id_Autor');
         });
     }
 
@@ -30,6 +28,6 @@ class CreateDireccionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('direccions');
+        Schema::dropIfExists('cursos');
     }
 }

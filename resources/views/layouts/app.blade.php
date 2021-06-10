@@ -35,26 +35,39 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    @php
-                        $verificationController = new \App\Http\Controllers\Auth\VerificationController();
-                        $usuario = $verificationController->getUserType();
-                    @endphp
-                    @if($usuario==1)
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('direccion') }}">{{ __('Ingresar Dirección') }}</a>
-                    </li>
-                    @endif
-                    @if($usuario==2)
+                    @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('compra') }}">{{ __('Ingresar Compra   ') }}</a>
+                            <a class="nav-link" href="{{ route('home') }}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mostrar') }}">{{ __('Mostrar Compra   ') }}</a>
+                            <a class="nav-link" href="{{ route('compras') }}">Ver Compras</a>
                         </li>
-                    @endif
+                        @if(\App\Http\Controllers\ProfesorController::existe())
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Subir Curso</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ventas') }}">Ver Ventas</a>
+                            </li>
+                        @endif
+                    @endauth
                 </ul>
+            {{--
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('direccion') }}">{{ __('Ingresar Dirección') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('compra') }}">{{ __('Ingresar Compra   ') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('mostrar') }}">{{ __('Mostrar Compra   ') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('comprar') }}">{{ __('Comprar   ') }}</a>
+                </li>
+            </ul>--}}
 
-                <!-- Right Side Of Navbar -->
+            <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
@@ -98,5 +111,7 @@
         @yield('content')
     </main>
 </div>
+<script src="https://unpkg.com/vue@next"></script>
+@yield('vue')
 </body>
 </html>

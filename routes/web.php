@@ -16,29 +16,13 @@ use App\Http\Controllers\CompraController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('bienvenido');
 });
-Route::get("/ingresar-direccion", function (){
-    if(Auth::check()){
-        return view("guardarDireccion");
-    }else{
-        return redirect("/login");
-    }
-})->name("direccion");
-Route::post("/guardar-direccion", [DireccionController::class, 'guardar']);
-
-Route::get("/ingresar-compra", function (){
-    if(Auth::check()){
-        return view("guardarCompra");
-    }else{
-        return redirect("/login");
-    }
-})->name("compra");
-Route::post("/guardar-compra", [CompraController::class, 'guardar'])->name("guardar-compra");
-
-Route::get("/mostrar-compras", [CompraController::class, 'mostrarPorUsuario']);
-Route::get("/mostrar-compras2", [CompraController::class, 'mostrarPorUsuario2'])->name("mostrar");
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// -- Profesor --
+Route::get('/registro-profesor', [\App\Http\Controllers\ProfesorController::class, 'guardar']);
+Route::get('/ver-ventas', [\App\Http\Controllers\ProfesorController::class, 'ventas'])->name('ventas');
+Route::get('/ver-compras', [\App\Http\Controllers\VentaController::class, 'ventasPorUsuario'])->name('compras');
