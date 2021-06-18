@@ -1,14 +1,29 @@
-<h1>Udemy</h1>
-@if (Route::has('login'))
-    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-        @auth
-            <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
-        @else
-            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+@extends('layouts.udemy')
 
-            @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-            @endif
-        @endauth
+@section('contenido')
+    <h1>Cursos Disponibles</h1>
+    <div class="row">
+        @foreach($cursos as $curso)
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{\Illuminate\Support\Facades\Storage::url($curso->imagen)}}" class="card-img-top" alt="imagen">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $curso->nombre }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ $curso->autor }}</h6>
+                            <a href="#" class="btn btn-primary">S/ {{ $curso->precio }}</a>
+                            @auth
+                                @if(\App\Http\Controllers\CursoController::comprado($curso->id))
+                                    <a href="" class="btn btn-primary">ver videos</a>
+                                @else
+                                    <a href="" class="btn btn-primary">comprar</a>
+                                @endif
+                            @else
+                                <a href="" class="btn btn-primary">registrarse</a>
+                            @endauth
+                        </div>
+                    </div>
+                </div>
+        @endforeach
     </div>
-@endif
+@endsection
+

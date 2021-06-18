@@ -17,6 +17,7 @@ class CreateCursosTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->float('precio');
+            $table->string('imagen');
             $table->unsignedBigInteger('id_Autor');
         });
     }

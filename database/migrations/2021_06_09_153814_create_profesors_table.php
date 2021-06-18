@@ -15,6 +15,7 @@ class CreateProfesorsTable extends Migration
     {
         Schema::create('profesors', function (Blueprint $table) {
             $table->id();
+            $table->binary("foto")->nullable();
             $table->unsignedBigInteger("id_Usuario");
         });
     }
